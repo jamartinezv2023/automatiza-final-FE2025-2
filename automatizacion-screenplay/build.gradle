@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.3.2'
+}
+
+group = 'com.fabricaescuela.automatizacion'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    serenityVersion = '4.3.2'
+    cucumberVersion = '7.20.1'
+}
+
+dependencies {
+
+    // Serenity Core
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+
+    // Cucumber JVM 7
+    testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+
+    // Selenium + Drivers
+    testImplementation "org.seleniumhq.selenium:selenium-java:4.23.0"
+    testImplementation "io.github.bonigarcia:webdrivermanager:5.8.0"
+}
+
+// ❌ NO USAR JUnit Platform / NO USAR JUnit5
+test {
+    // Serenity usa JUnit4, no tocar
+}
+
+serenity {
+    testRoot = "src/test/java"
+}
